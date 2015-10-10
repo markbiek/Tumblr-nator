@@ -61,12 +61,15 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
           <div class="inner cover">
             <h1 class="cover-heading">Enter a Tumblr blog name:</h1>
             <p class="lead">
-                <form>
-                    <div class="form-group">
-                        <input type="text" name="blog_name" id="blog-name" value="" />
-                    </div>
-                    <input type="submit" class="btn btn-primary" name="submit" value="Load" />
-                </form>
+                <?php
+                    echo $this->Form->create(false, array('type'=> 'post'));
+                    echo $this->Form->input('blog_name', array('label'=> false, 'class'=> 'form-control', "default"=> "everythingharrypotter.tumblr.com"));
+                ?>
+                <p><small>Blog name can be: domain.com, http://domain.com, blogname.tumblr.com, http://blogname.tumblr.com, or blogname</small></p>
+                <?php
+                echo $this->Form->submit('Load', array('class'=> 'btn btn-primary'));
+                echo $this->Form->end();
+                ?>
             </p>
           </div>
 
