@@ -37,9 +37,52 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
     <?= $this->Html->meta('icon') ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <?= $this->Html->css('cover.css') ?>
 </head>
 <body class="home">
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Tumblr-nator</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="/via">Home</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Enter a Tumblr blog name:</h1>
+            <p class="lead">
+                <form>
+                    <div class="form-group">
+                        <input type="text" name="blog_name" id="blog-name" value="" />
+                    </div>
+                    <input type="submit" class="btn btn-primary" name="submit" value="Load" />
+                </form>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Code Test for <a href="http://viastudio.com">Via Studio</a>, by <a href="https://https://careers.stackoverflow.com/markbiek">Mark Biek</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <?= $this->Html->script('ie10-viewport-bug-workaround.js'); ?>
 </body>
 </html>
