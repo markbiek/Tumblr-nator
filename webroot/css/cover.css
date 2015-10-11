@@ -121,6 +121,22 @@ body {
   font-weight: bold;
 }
 
+/*
+ * Post content
+ */
+.posts {
+    height: 275px;
+    overflow-y: scroll;
+}
+    .posts .post {
+        width: 50%;
+        margin: 0 auto 10px auto;;
+        border-bottom: 1px solid #ccc;
+    }
+    .post p {
+        text-align: left;
+    }
+
 
 /*
  * Footer

@@ -40,6 +40,8 @@ class HomeController extends AppController {
         }
 
         if(array_key_exists('blog_name', $this->request->data)) {
+            //Load the first <n> posts in the controller
+            //The rest will happen via ajax
             $data['blog_name'] = $this->cleanBlogName($this->request->data['blog_name']);
             $session->write("Home.blogName", $data['blog_name']);
 
@@ -47,13 +49,13 @@ class HomeController extends AppController {
             $curOffset = 0;
             $posts = $blog->loadPostsRange($curOffset);
 
+            $this->set('page_size', $blog->pageSize);
             $this->set('num_posts', $blog->numPosts);
+            $this->set('posts', $posts);
 
-            $this->Paginator->settings = [
-                    'limit'=> Configure::read('page_size')
-                ];
             //echo '<pre>' . print_r($posts, true) . '</pre>';
-            $data['posts'] = $this->Paginator->paginate($posts);
+        }else {
+            $this->set('posts', []);
         }
 
         $this->set('form', $form);

@@ -74,17 +74,18 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
             </p>
           </div>
 
-          <div class="row page">
-            <div class="col-md-10">
-                <?php if(count($posts) >0) {
-                    echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled')) . '&nbsp;';
-                    echo $this->Paginator->numbers() . '&nbsp;';
-                    echo $this->Paginator->next(__('next') . ' >> ', array(), null, array('class' => 'next disabled')) . '&nbsp;';
-
-                }
-                ?>
+        <?php if(count($posts) >0): ?>
+        <div class="posts" data-num-posts="<?= $num_posts?>" data-pagesize="<?= $page_size?>">
+                <?php foreach($posts as $post): ?>
+                    <div class="post">
+                    <p class="post-id"><?= $post['id'] ?></p>
+                    <p class="post-date"><?= $post['date'] ?></p>
+                    <p><a href="<?= $post['post_url'] ?>" target="_blank">View post on Tumblr</a></p>
+                    </div>
+                <?php endforeach; ?>
+                <div class="post-nav"></div>
             </div>
-          </div>
+        <?php endif; ?>
 
           <div class="mastfoot">
             <div class="inner">

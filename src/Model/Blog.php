@@ -4,23 +4,23 @@ namespace App\Model;
 use Cake\Core\Configure;
 
 class Blog {
-    private $pageSize;
+    public $pageSize;
     public $posts;
     public $api_key;
-    public $blog_name;
+    public $blogName;
     public $numPosts;
 
-    public function __construct($blog_name) {
+    public function __construct($blogName) {
         $this->api_key = Configure::read('tumblr_api');
         $this->pageSize = Configure::read('page_size');
-        $this->blog_name = $blog_name;
+        $this->blogName = $blogName;
         $this->numPosts = $this->numPosts();
     }
 
     public function loadPostsRange($offset=0) {
         $api_key = Configure::read('tumblr_api');
-        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/posts/?limit={$this->pageSize}&offset=$offset";
-        $data = $this->tumblrApiCall($this->blog_name, $url);
+        $url = "http://api.tumblr.com/v2/blog/{$this->blogName}/posts/?limit={$this->pageSize}&offset=$offset";
+        $data = $this->tumblrApiCall($this->blogName, $url);
 
         if($data && $data['response'] && $data['response']['posts']) {
             $posts = $data['response']['posts'];
@@ -33,8 +33,8 @@ class Blog {
     }
 
     private function numPosts() {
-        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/info/?";
-        $data = $this->tumblrApiCall($this->blog_name, $url);
+        $url = "http://api.tumblr.com/v2/blog/{$this->blogName}/info/?";
+        $data = $this->tumblrApiCall($this->blogName, $url);
 
         if($data && $data['response'] && $data['response']['blog']) {
             return $data['response']['blog']['posts'];
@@ -58,7 +58,7 @@ class Blog {
                 $offset = $numPosts-1;
             } 
 
-            $posts = $this->loadPostsRange($this->blog_name, $start);
+            $posts = $this->loadPostsRange($this->blogName, $start);
             $this->posts = array_merge($this->posts, $posts);
 
             $start = $offset+1;
@@ -78,7 +78,7 @@ class Blog {
     }
 
 
-    private function tumblrApiCall($blog_name, $url) {
+    private function tumblrApiCall($blogName, $url) {
         $url .= "&api_key={$this->api_key}";
 
         $ch = curl_init($url);
