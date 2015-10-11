@@ -13,10 +13,10 @@ class Blog {
         $this->api_key = Configure::read('tumblr_api');
         $this->pageSize = Configure::read('page_size');
         $this->blog_name = $blog_name;
-        $this->loadPosts();
+        $this->loadAllPosts();
     }
 
-    private function loadPosts() {
+    private function loadAllPosts() {
         $this->posts = array();
         $numPosts = $this->numPosts();
         if($numPosts <=0) {
@@ -81,7 +81,7 @@ class Blog {
 
     private function loadPostsRange($offset=0) {
         $api_key = Configure::read('tumblr_api');
-        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/posts/?limit=10&offset=$offset";
+        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/posts/?limit={$this->pageSize}&offset=$offset";
         $data = $this->tumblrApiCall($this->blog_name, $url);
 
         if($data && $data['response'] && $data['response']['posts']) {
