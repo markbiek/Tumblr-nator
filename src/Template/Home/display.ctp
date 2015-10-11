@@ -80,7 +80,7 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
                     <div class="post">
                     <p class="post-id"><?= $post['id'] ?></p>
                     <p class="post-date"><?= $post['date'] ?></p>
-                    <p><a href="<?= $post['post_url'] ?>" target="_blank">View post on Tumblr</a></p>
+                    <p><a href="<?= $post['post_url'] ?>" target="_blank">View on Tumblr</a></p>
                     </div>
                 <?php endforeach; ?>
             </div>
