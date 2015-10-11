@@ -60,6 +60,7 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
 
           <div class="inner cover">
             <h1 class="cover-heading">Enter a Tumblr blog name:</h1>
+            <p class="bg-warning"><?= $form_error ?></p>
             <p class="lead">
                 <?php
                     echo $this->Form->create(false, ['type'=> 'post']);

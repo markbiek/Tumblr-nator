@@ -2,6 +2,10 @@
  * Globals
  */
 
+.bg-warning {
+    color: #000;
+}
+
 /* Links */
 a,
 a:focus,
