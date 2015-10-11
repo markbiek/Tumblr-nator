@@ -83,7 +83,9 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
                     <p><a href="<?= $post['post_url'] ?>" target="_blank">View post on Tumblr</a></p>
                     </div>
                 <?php endforeach; ?>
-                <div class="post-nav"></div>
+            </div>
+            <div class="post-nav">
+                <ul id="pagination" class="pagination-sm"></ul>
             </div>
         <?php endif; ?>
 
@@ -101,5 +103,7 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <?= $this->Html->script('ie10-viewport-bug-workaround.js'); ?>
+    <?= $this->Html->script('jquery.twbsPagination.min.js'); ?>
+    <?= $this->Html->script('global.js'); ?>
 </body>
 </html>
