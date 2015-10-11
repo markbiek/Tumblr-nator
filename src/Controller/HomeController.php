@@ -20,6 +20,29 @@ class HomeController extends AppController {
         return $blog_name;
     }
 
+    //We use this action to query posts at a certain offset from JS
+    //Otherwise we run into same-origin issues querying the Tumblr api
+    public function posts() {
+        header("Content-Type: application/json");
+
+        $this->autoRender = false;
+        $session = $this->request->session();
+        if(!array_key_exists('offset', $this->request->query)) { 
+            echo json_encode([
+                    'status'=> 'error',
+                    'msg'=> 'Invalid request'
+                ]);
+        }else {
+            $offset = $this->request->query['offset'];
+            $blog_name = $session->read("Home.blogName");
+
+            $blog = new Blog($blog_name);
+            $posts = $blog->loadPostsRange($offset);
+
+            echo json_encode($posts);
+        }
+    }
+
     public function display() {
         $api_key = Configure::read('tumblr_api');
         $form = new TumblrForm();
@@ -49,6 +72,7 @@ class HomeController extends AppController {
             $curOffset = 0;
             $posts = $blog->loadPostsRange($curOffset);
 
+            $this->set('api_key', $blog->apiKey);
             $this->set('page_size', $blog->pageSize);
             $this->set('num_posts', $blog->numPosts);
             $this->set('posts', $posts);

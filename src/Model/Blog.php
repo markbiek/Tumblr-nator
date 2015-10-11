@@ -6,19 +6,19 @@ use Cake\Core\Configure;
 class Blog {
     public $pageSize;
     public $posts;
-    public $api_key;
+    public $apiKey;
     public $blogName;
     public $numPosts;
 
     public function __construct($blogName) {
-        $this->api_key = Configure::read('tumblr_api');
+        $this->apiKey = Configure::read('tumblr_api');
         $this->pageSize = Configure::read('page_size');
         $this->blogName = $blogName;
         $this->numPosts = $this->numPosts();
     }
 
     public function loadPostsRange($offset=0) {
-        $api_key = Configure::read('tumblr_api');
+        $apiKey = Configure::read('tumblr_api');
         $url = "http://api.tumblr.com/v2/blog/{$this->blogName}/posts/?limit={$this->pageSize}&offset=$offset";
         $data = $this->tumblrApiCall($this->blogName, $url);
 
@@ -79,7 +79,7 @@ class Blog {
 
 
     private function tumblrApiCall($blogName, $url) {
-        $url .= "&api_key={$this->api_key}";
+        $url .= "&api_key={$this->apiKey}";
 
         $ch = curl_init($url);
         curl_setopt_array($ch, array(
