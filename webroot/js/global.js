@@ -19,6 +19,7 @@ if(typeof console=='undefined')console={log:function(){}};
                     //we'll do a call to the tumblr api to get the content
                     var offset = ( (page-1) * 10) ;
                     var url = '/via/posts';
+                    $('.posts').html('<img src="/via/img/loading.gif" alt="Loading..." />');
                     $.get(url, { offset: offset }, function(data, stat, xhr) {
                         console.log(data);
                         //Once we have the content, we'll create
