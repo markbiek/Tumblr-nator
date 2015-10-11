@@ -8,17 +8,44 @@ class Blog {
     public $posts;
     public $api_key;
     public $blog_name;
+    public $numPosts;
 
     public function __construct($blog_name) {
         $this->api_key = Configure::read('tumblr_api');
         $this->pageSize = Configure::read('page_size');
         $this->blog_name = $blog_name;
-        $this->loadAllPosts();
+        $this->numPosts = $this->numPosts();
+    }
+
+    public function loadPostsRange($offset=0) {
+        $api_key = Configure::read('tumblr_api');
+        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/posts/?limit={$this->pageSize}&offset=$offset";
+        $data = $this->tumblrApiCall($this->blog_name, $url);
+
+        if($data && $data['response'] && $data['response']['posts']) {
+            $posts = $data['response']['posts'];
+        }else {
+            //Error parsing json
+            $posts = array();
+        }
+
+        return $posts;
+    }
+
+    private function numPosts() {
+        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/info/?";
+        $data = $this->tumblrApiCall($this->blog_name, $url);
+
+        if($data && $data['response'] && $data['response']['blog']) {
+            return $data['response']['blog']['posts'];
+        }else {
+            return -1;
+        }
     }
 
     private function loadAllPosts() {
         $this->posts = array();
-        $numPosts = $this->numPosts();
+        $numPosts = $this->numPosts;
         if($numPosts <=0) {
             //No posts or an error occurred
             throw new Exception("Unable to find the number of posts. Please verify that this blog contains content.");
@@ -68,31 +95,7 @@ class Blog {
         return $data;
     }
 
-    private function numPosts() {
-        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/info/?";
-        $data = $this->tumblrApiCall($this->blog_name, $url);
 
-        if($data && $data['response'] && $data['response']['blog']) {
-            return $data['response']['blog']['posts'];
-        }else {
-            return -1;
-        }
-    }
-
-    private function loadPostsRange($offset=0) {
-        $api_key = Configure::read('tumblr_api');
-        $url = "http://api.tumblr.com/v2/blog/{$this->blog_name}/posts/?limit={$this->pageSize}&offset=$offset";
-        $data = $this->tumblrApiCall($this->blog_name, $url);
-
-        if($data && $data['response'] && $data['response']['posts']) {
-            $posts = $data['response']['posts'];
-        }else {
-            //Error parsing json
-            $posts = array();
-        }
-
-        return $posts;
-    }
 
 }
 ?>

@@ -74,6 +74,18 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
             </p>
           </div>
 
+          <div class="row page">
+            <div class="col-md-10">
+                <?php if(count($posts) >0) {
+                    echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled')) . '&nbsp;';
+                    echo $this->Paginator->numbers() . '&nbsp;';
+                    echo $this->Paginator->next(__('next') . ' >> ', array(), null, array('class' => 'next disabled')) . '&nbsp;';
+
+                }
+                ?>
+            </div>
+          </div>
+
           <div class="mastfoot">
             <div class="inner">
               <p>Code Test for <a href="http://viastudio.com">Via Studio</a>, by <a href="https://https://careers.stackoverflow.com/markbiek">Mark Biek</a>.</p>

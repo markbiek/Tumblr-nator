@@ -8,6 +8,8 @@ use App\Form\TumblrForm;
 use App\Model\Blog;
 
 class HomeController extends AppController {
+    public $components = array('Paginator');
+
     private function cleanBlogName($blog_name) {
         $blog_name = str_replace('http://', '', strtolower($blog_name));
         $blog_name = trim($blog_name, '/');
@@ -42,6 +44,16 @@ class HomeController extends AppController {
             $session->write("Home.blogName", $data['blog_name']);
 
             $blog = new Blog($data['blog_name']);
+            $curOffset = 0;
+            $posts = $blog->loadPostsRange($curOffset);
+
+            $this->set('num_posts', $blog->numPosts);
+
+            $this->Paginator->settings = [
+                    'limit'=> Configure::read('page_size')
+                ];
+            //echo '<pre>' . print_r($posts, true) . '</pre>';
+            $data['posts'] = $this->Paginator->paginate($posts);
         }
 
         $this->set('form', $form);
