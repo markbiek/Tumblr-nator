@@ -22,6 +22,7 @@ class HomeController extends AppController {
 
         $data = [];
         $data['blog_name'] = 'everythingharrypotter.tumblr.com';
+        $session->write("Home.blogName", $data['blog_name']);
 
         if($this->request->is('post')) {
             $data['blog_name'] = $this->cleanBlogName($this->request->data['blog_name']);
@@ -38,7 +39,6 @@ class HomeController extends AppController {
         }
         */
 
-        echo '<pre>' . print_r($data, true) . '</pre>';
         $this->set($data);
     }
 
