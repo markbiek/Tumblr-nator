@@ -17,6 +17,7 @@ class Blog {
         $this->numPosts = $this->numPosts();
     }
 
+    //Load the next <n> posts starting at $offset
     public function loadPostsRange($offset=0) {
         $apiKey = Configure::read('tumblr_api');
         $url = "http://api.tumblr.com/v2/blog/{$this->blogName}/posts/?limit={$this->pageSize}&offset=$offset";
@@ -32,6 +33,7 @@ class Blog {
         return $posts;
     }
 
+    //Returns the total number of posts for the blog
     private function numPosts() {
         $url = "http://api.tumblr.com/v2/blog/{$this->blogName}/info/?";
         $data = $this->tumblrApiCall($this->blogName, $url);
@@ -43,6 +45,7 @@ class Blog {
         }
     }
 
+    //Loads all posts for the blog at once. This doesn't get used because it's slow for large blogs.
     private function loadAllPosts() {
         $this->posts = array();
         $numPosts = $this->numPosts;
@@ -77,7 +80,7 @@ class Blog {
         return true;
     }
 
-
+    //Generic function to call the Tumblr API
     private function tumblrApiCall($blogName, $url) {
         $url .= "&api_key={$this->apiKey}";
 

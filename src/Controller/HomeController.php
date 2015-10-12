@@ -10,6 +10,7 @@ use App\Model\Blog;
 class HomeController extends AppController {
     public $components = array('Paginator');
 
+    //Cleanup the entered name so we can accept the name in a variety of formats
     private function cleanBlogName($blog_name) {
         $blog_name = str_replace('http://', '', strtolower($blog_name));
         $blog_name = trim($blog_name, '/');
@@ -20,12 +21,16 @@ class HomeController extends AppController {
         return $blog_name;
     }
 
-    //We use this action to query posts at a certain offset from JS
-    //Otherwise we run into same-origin issues querying the Tumblr api
+    /*
+     * Our JS pagination code queries this url to get the next page worth of posts.
+     * Otherwise we'd run into same-origin problems.
+    */
     public function posts() {
         header("Content-Type: application/json");
+        
+        //Make sure we don't automatically load any templates
+        $this->autoRender = false; 
 
-        $this->autoRender = false;
         $session = $this->request->session();
         if(!array_key_exists('offset', $this->request->query)) { 
             echo json_encode([
@@ -54,6 +59,7 @@ class HomeController extends AppController {
         $this->set('form_error', '');
 
         if($this->request->is('post')) {
+            //Validate the form
             if(!$form->execute($this->request->data)) {
                 $errors = $form->errors();
                 $this->set('form_error', $errors['blog_name']['_empty']);
@@ -63,11 +69,11 @@ class HomeController extends AppController {
         }
 
         if(array_key_exists('blog_name', $this->request->data)) {
-            //Load the first <n> posts in the controller
-            //The rest will happen via ajax
             $data['blog_name'] = $this->cleanBlogName($this->request->data['blog_name']);
             $session->write("Home.blogName", $data['blog_name']);
 
+            //Load the first <n> posts in the controller
+            //The rest will happen via ajax
             $blog = new Blog($data['blog_name']);
             $curOffset = 0;
             $posts = $blog->loadPostsRange($curOffset);
