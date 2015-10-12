@@ -1,26 +1,24 @@
-# CakePHP Application Skeleton
+# Tumblr-nator
 
-[![Build Status](https://api.travis-ci.org/cakephp/app.png)](https://travis-ci.org/cakephp/app)
-[![License](https://poser.pugx.org/cakephp/app/license.svg)](https://packagist.org/packages/cakephp/app)
+*Author:* Mark Biek
 
-A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x.
+A simple website written for Via Studio as a code challenge.
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## Notes
+This exercise is loosely based on a [similar exercise](https://github.com/markbiek/TumblrAPIExample/) I did two years ago.
 
-## Installation
+The previous version loaded all posts for the blog at once and pushed them directly into the CakePHP Paginator. Obviously this was quite slow.
 
-1. Download [Composer](http://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+The current version only loads the first 10 posts on page load. Subsequent pages are loaded then that page number is clicked on the pagination nav. The newly loaded pages are cached on the page so we don't have to make the same ajax calls over and over.
 
-If Composer is installed globally, run
-```bash
-composer create-project --prefer-dist cakephp/app [app_name]
-```
+## Requirements
+* Build a form that accepts a Tumblr blog name as its input and use the Tumblr API to retrieve posts for that blog.
+* Results should be shown 10 at a time and have correctly functioning pagination links. ie. ‘next’ link only works if there are more posts, ‘3’ link should show results 21-30, etc.
+* For each post, show it’s post ID, publish date and a link to the post on Tumblr.
+* You may use the following API key: (api key provided)
+* Use of a PHP framework is not required but strongly encouraged. You may choose the framework you are most comfortable with.
+* An emphasis should not be given on design. However, the post results should still be readable.
 
-You should now be able to visit the path to where you installed the app and see
-the setup traffic lights.
-
-## Configuration
-
-Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+## Implementation
+* [CakePHP 3](http://cakephp.org/)
+* [Bootstrap 3](http://getbootstrap.com/)
