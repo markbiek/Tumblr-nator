@@ -71,6 +71,9 @@ class HomeController extends AppController {
             $blog = new Blog($data['blog_name']);
             $curOffset = 0;
             $posts = $blog->loadPostsRange($curOffset);
+            if(count($posts) <= 0) {
+                $this->set('form_error', "Sorry, we couldn't load any posts for that blog.");
+            }
 
             $this->set('api_key', $blog->apiKey);
             $this->set('page_size', $blog->pageSize);
