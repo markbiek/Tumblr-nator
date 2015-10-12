@@ -9,7 +9,7 @@ This exercise is loosely based on a [similar exercise](https://github.com/markbi
 
 The previous version loaded all posts for the blog at once and pushed them directly into the CakePHP Paginator. Obviously this was quite slow.
 
-The current version only loads the first 10 posts on page load. Subsequent pages are loaded then that page number is clicked on the pagination nav. The newly loaded pages are cached on the page so we don't have to make the same ajax calls over and over.
+The current version only loads the first 10 posts on page load. Subsequent pages are loaded when that page number is clicked on the pagination nav. The newly loaded pages are cached on the page so we don't have to make the same ajax calls over and over.
 
 ## Requirements
 * Build a form that accepts a Tumblr blog name as its input and use the Tumblr API to retrieve posts for that blog.
