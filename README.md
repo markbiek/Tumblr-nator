@@ -22,3 +22,8 @@ The current version only loads the first 10 posts on page load. Subsequent pages
 ## Implementation
 * [CakePHP 3](http://cakephp.org/)
 * [Bootstrap 3](http://getbootstrap.com/)
+
+## Issues
+* Pagination nav looks crappy on mobile
+* Loading gif needs a transparent background
+* On mobile, it's tricky to scroll the page down without scrolling the posts by accident
