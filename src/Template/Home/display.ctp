@@ -66,7 +66,7 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
                     echo $this->Form->create(false, ['type'=> 'post']);
                     echo $this->Form->input('blog_name', ['label'=> false, 'class'=> 'form-control', "default"=> $blog_name]);
                 ?>
-                <p><small>Blog name can be: domain.com, http://domain.com, blogname.tumblr.com, http://blogname.tumblr.com, or blogname</small></p>
+                <p><small>Blog name can be:  blogname.tumblr.com, http://blogname.tumblr.com, or blogname</small></p>
                 <?php
                 echo $this->Form->submit('Load', ['class'=> 'btn btn-primary']);
                 echo $this->Form->end();
