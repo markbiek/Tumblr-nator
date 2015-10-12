@@ -91,7 +91,7 @@ $cakeDescription = 'Mark Biek | Code Test | Via Studio';
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Code Test for <a href="http://viastudio.com">Via Studio</a>, by <a href="https://https://careers.stackoverflow.com/markbiek">Mark Biek</a>.</p>
+              <p>Code Test for <a href="http://viastudio.com">Via Studio</a>, by <a href="https://careers.stackoverflow.com/markbiek">Mark Biek</a>.</p>
             </div>
           </div>
 
