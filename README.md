@@ -25,5 +25,4 @@ The current version only loads the first 10 posts on page load. Subsequent pages
 
 ## Issues
 * Pagination nav looks crappy on mobile
-* Loading gif needs a transparent background
 * On mobile, it's tricky to scroll the page down without scrolling the posts by accident

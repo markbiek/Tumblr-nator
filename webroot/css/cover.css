@@ -6,6 +6,17 @@
     color: #000;
 }
 
+.spinner {
+    width: 84px;
+    height: 84px;
+    margin: 75px auto 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background: url('/via/img/loading.gif');
+    border-radius: 50%;
+    opacity: .5;
+}
+
 /* Links */
 a,
 a:focus,
